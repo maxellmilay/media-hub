@@ -1,5 +1,5 @@
 interface CourseInterface {
-  id: number;
+  id: string;
   title: string;
   description: string;
   link: string;

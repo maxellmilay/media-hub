@@ -3,14 +3,18 @@ import Link from 'next/link';
 import CourseInterface from '../interface/CourseInterface';
 import '@/app/styles/shadow.css';
 
+interface PropsInterface {
+  courses: CourseInterface[];
+}
+
 const fetchCourses = async () => {
   const response = await fetch('http://localhost:3000/api/courses');
   const courses: CourseInterface[] = await response.json();
   return courses;
 };
 
-const Courses = async () => {
-  const courses = await fetchCourses();
+const Courses = async (props: PropsInterface) => {
+  const { courses } = props;
 
   return (
     <div className="flex flex-col">

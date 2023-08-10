@@ -1,5 +1,5 @@
 'use client';
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Courses from './components/Courses';
 import LoadingPage from './loading';
 import CourseInterface from './interface/CourseInterface';
@@ -16,6 +16,10 @@ const HomePage = () => {
     setLoading(false);
   };
 
+  const getSearchResults = (courses: CourseInterface[]) => {
+    setCourses(courses);
+  };
+
   useEffect(() => {
     fetchCourse();
   }, []);
@@ -27,7 +31,7 @@ const HomePage = () => {
   return (
     <>
       <h1 className="text-3xl font-semibold mb-5">Welcome to Media Hub</h1>
-      <CourseSearch />
+      <CourseSearch handleSearchResults={getSearchResults} />
       <Courses courses={courses} />
     </>
   );

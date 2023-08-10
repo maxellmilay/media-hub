@@ -1,12 +1,22 @@
 'use client';
 import React, { useState } from 'react';
+import CourseInterface from '../interface/CourseInterface';
 
-const CourseSearch = () => {
+interface PropsInterface {
+  handleSearchResults: (courses: CourseInterface[]) => void;
+}
+
+const CourseSearch = (props: PropsInterface) => {
+  const { handleSearchResults: getSearchResults } = props;
+
   const [query, setQuery] = useState('');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const res = await fetch(`/api/courses/search?query=${query}`);
+    const courses: CourseInterface[] = await res.json();
+    getSearchResults(courses);
   };
 
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
